@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ingresosapp-3b022": {
+      "hosting": {
+        "ingresoEgresoApp": [
+          "ingresosapp-3b022"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ingresosapp-3b022"
+  }
+}
