@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AdminRoutingModule } from './admin-routing.module';
+
+import { CoreModule } from '../core/core.module';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -24,8 +28,10 @@ import { IngresoEgresoComponent } from './pages/ingreso-egreso/ingreso-egreso.co
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    CoreModule
   ]
 })
 export class AdminModule { }

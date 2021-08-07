@@ -17,7 +17,8 @@ import { User } from './../models/user.model';
 })
 export class AuthService {
 
-  userSubs: Subscription
+  userSubs: Subscription;
+  private _user: User;
 
   constructor(
     private auth: AngularFireAuth,
@@ -30,12 +31,22 @@ export class AuthService {
       if(user){
         this.userSubs = this.db.collection('users').doc(user.uid).valueChanges()
         .subscribe((usuario: User) => {
-          this.store.dispatch(authActions.setUser({user: usuario}));
+          this._user = {
+            uid: usuario.uid,
+            name: usuario.name,
+            email: usuario.email
+          };
+          this.store.dispatch(authActions.setUser({user: {
+            uid: usuario.uid,
+            name: usuario.name,
+            email: usuario.email
+          }}));
         })
       }else{
         if(this.userSubs){
           this.userSubs.unsubscribe();
         }
+        this._user = null;
         this.store.dispatch(authActions.unSetUser());
       }
     })
@@ -66,6 +77,10 @@ export class AuthService {
 
   logout(): Promise<void>{
     return this.auth.signOut();
+  }
+
+  get user(): User{
+    return this._user;
   }
 
 }
