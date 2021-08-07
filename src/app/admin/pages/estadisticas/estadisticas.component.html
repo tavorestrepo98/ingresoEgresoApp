@@ -60,7 +60,7 @@
                   <div class="fluid-container">
                     <h3 [ngClass]="{
                       'text-success': totalIngresos - totalEgresos > 0,
-                      'text-danger': totalIngresos - totalEgresos < 0
+                      'text-danger': totalIngresos - egresos < 0
                     }"
                         class="font-weight-medium text-right mb-0">
                       {{ totalIngresos - totalEgresos | currency }}
@@ -72,12 +72,19 @@
     </div>
   </div>
 
-  <div class="col-12 p-5" *ngIf="ingresos > 0 || egresos > 0">
+  <div class="col-12 p-5">
       <div class="card card-statistics">
         <div class="card-body">
           <h1 class="card-title">Gráfica</h1>
 
-            <!-- grÃ¡fica ira aquÃ­ -->
+          <div style="display: block">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [colors]="pieChartColors"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
 
         </div>
       </div>

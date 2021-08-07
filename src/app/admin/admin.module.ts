@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { StoreModule } from '@ngrx/store';
+import { ingresoEgresoReducer } from './ingresoEgreso.reducer';
+import { ChartsModule } from 'ng2-charts';
+
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { CoreModule } from '../core/core.module';
@@ -30,6 +34,8 @@ import { IngresoEgresoComponent } from './pages/ingreso-egreso/ingreso-egreso.co
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
+    ChartsModule,
+    StoreModule.forFeature('ingresosEgresos', ingresoEgresoReducer),
     AdminRoutingModule,
     CoreModule
   ]

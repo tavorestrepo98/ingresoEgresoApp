@@ -1,8 +1,11 @@
-import { IngresoEgreso } from './../../../core/models/ingresoEgreso.model';
 import { Component, OnInit } from '@angular/core';
 
-import { AppState } from './../../../app.reducer';
 import { Store } from '@ngrx/store';
+import { IngresoEgreso } from './../../../core/models/ingresoEgreso.model';
+import { AppStateWithIngresoEgreso } from './../../ingresoEgreso.reducer';
+
+import { ChartType } from 'chart.js';
+import { MultiDataSet, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-estadisticas',
@@ -17,8 +20,18 @@ export class EstadisticasComponent implements OnInit {
   totalIngresos: number = 0;
   totalEgresos: number = 0;
 
+  public doughnutChartLabels: Label[] = ['Ingresos', 'Egresos'];
+  public doughnutChartData: MultiDataSet = [[]];
+  public doughnutChartType: ChartType = 'doughnut';
+
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(0,255,0,0.3)', 'rgba(255,0,0,0.3)'],
+    },
+  ];
+
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppStateWithIngresoEgreso>
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +50,7 @@ export class EstadisticasComponent implements OnInit {
         this.totalEgresos += item.monto;
         this.egresos ++;
       }
+      this.doughnutChartData = [[this.totalIngresos, this.totalEgresos]];
     })
   }
 

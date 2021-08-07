@@ -3,9 +3,9 @@ import { IngresoEgresoService } from './../../../core/services/ingreso-egreso.se
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
+import { AppStateWithIngresoEgreso } from './../../ingresoEgreso.reducer';
 
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { IngresoEgreso } from './../../../core/models/ingresoEgreso.model';
 
@@ -21,7 +21,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   //items$: Observable<IngresoEgreso[]>;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<AppStateWithIngresoEgreso>,
     private ingresoEgresoService: IngresoEgresoService
   ) { }
 
@@ -34,7 +34,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //this.subs.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   borrarItem(id: string){
